@@ -100,5 +100,15 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d) {
 	{
 		dotHitWall(screen, d);
 	}
+	else if (screen[d->height][d->width] == RACKET_BRUSH)
+	{
+
+	}
+
+	
 	screen[d->height][d->width] = DOT;
+}
+
+void dotHitRacket(Dot *d) {
+
 }
