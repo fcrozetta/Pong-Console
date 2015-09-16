@@ -13,3 +13,5 @@ typedef struct dot
 void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d);
 void initializeDot(char screen[HEIGHT][WIDTH], Dot * d,direction direction);
 void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d);
+void dotHitRacket(char screen[HEIGHT][WIDTH], Dot * d, Racket * r);
+

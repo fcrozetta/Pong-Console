@@ -9,8 +9,8 @@
 #define WIDTH 80
 #define DOT '*'
 #define SPACE ' '
-#define WALL_TOP_BOTTOM '-'
-#define WALL_LEFT_RIGHT '|'
+#define WALL_TOP_BOTTOM '.'
+#define WALL_LEFT_RIGHT '.'
 #define RACKET_BRUSH '|'
 #define clear() system("cls");
 #define sleep() Sleep(1);
@@ -24,7 +24,9 @@
 #include <Windows.h>
 #include <conio.h>
 #include "Screen.h"
-#include "Dot.h"
 #include "Racket.h"
+#include "Dot.h"
+
+
 
 

@@ -6,9 +6,11 @@ void moveRacket(char screen[HEIGHT][WIDTH], Racket *r) {
 
 void initializeRacket(char screen[HEIGHT][WIDTH], racket *r, Side s) {
 	r->centerH = HEIGHT / 2;
+	r->side = s;
 	switch (s)
 	{
 	case Side::LEFT_SIDE:
+		
 		r->centerW = 2;
 		break;
 	case Side::RIGHT_SIDE:
