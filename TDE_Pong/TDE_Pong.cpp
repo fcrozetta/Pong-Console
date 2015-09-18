@@ -10,6 +10,7 @@ int main()
 
 	Racket r1 = Racket();
 	Racket r2 = Racket();
+	Racket * List [] = { &r1,&r2 };
 
 	Dot ball = Dot();	
 	char screen[HEIGHT][WIDTH];
@@ -42,19 +43,19 @@ int main()
 			/* _kbhit is used to know if user pressed a button (keyboard) */
 			char pressedKey = _getch();
 			if (pressedKey == 'w'){
-				moveRacket(screen, &r1,direction::UP);
+				moveRacket(screen, &r1,UP);
 			}
 			if (pressedKey == 's')
 			{
-				moveRacket(screen, &r1, direction::DOWN);
+				moveRacket(screen, &r1, DOWN);
 			}
 			if (pressedKey == 'i')
 			{
-				moveRacket(screen, &r2, direction::UP);
+				moveRacket(screen, &r2, UP);
 			}
 			if (pressedKey == 'k')
 			{
-				moveRacket(screen,&r2,direction::DOWN);
+				moveRacket(screen,&r2,DOWN);
 			}
 		}
 
