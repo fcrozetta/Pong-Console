@@ -1,5 +1,9 @@
 #include "stdafx.h"
 
+void goal(int x){
+	
+}
+
 void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d) {
 	switch (d->direction)
 	{
