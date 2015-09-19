@@ -10,7 +10,7 @@ int main()
 
 	Racket r1 = Racket();
 	Racket r2 = Racket();
-	Racket * List [] = { &r1,&r2 };
+	Racket * List [2] = { &r1,&r2 };
 
 	Dot ball = Dot();	
 	char screen[HEIGHT][WIDTH];
@@ -22,18 +22,20 @@ int main()
 	while (true) // Main loop
 	{
 		initialize(screen);
+		
 		drawRacket(screen, &r1);
 		drawRacket(screen, &r2);
-		moveDot(screen, ball.direction, &ball);
+
+		moveDot(screen, ball.direction, &ball, &List);
 		if (screen[ball.height][ball.width] == RACKET_BRUSH)
 		{
 			if (ball.width < (WIDTH/2))
 			{
-				dotHitRacket(screen,&ball, &r1);
+				dotHitRacket(screen,&ball, &r1, &List);
 			}
 			else
 			{
-				dotHitRacket(screen,&ball, &r2);
+				dotHitRacket(screen,&ball, &r2, &List);
 			}
 			
 		}
