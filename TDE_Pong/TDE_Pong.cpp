@@ -4,13 +4,12 @@
 #include "stdafx.h"
 
 
-int main()
-{
+int main(){
 	/* Initialize scene and its objects */
 
 	Racket r1 = Racket();
 	Racket r2 = Racket();
-	Racket * List [] = { &r1,&r2 };
+	Racket * List [2] = { &r1,&r2 };
 
 	Dot ball = Dot();	
 	char screen[HEIGHT][WIDTH];
@@ -18,22 +17,23 @@ int main()
 	initializeRacket(screen, &r2, RIGHT_SIDE);
 	initializeDot(screen, &ball, UPLEFT);
 	
-
 	while (true) // Main loop
 	{
 		initialize(screen);
+		
 		drawRacket(screen, &r1);
 		drawRacket(screen, &r2);
-		moveDot(screen, ball.direction, &ball);
+
+		moveDot(screen, ball.direction, &ball, List);
 		if (screen[ball.height][ball.width] == RACKET_BRUSH)
 		{
 			if (ball.width < (WIDTH/2))
 			{
-				dotHitRacket(screen,&ball, &r1);
+				dotHitRacket(screen,&ball, &r1, List);
 			}
 			else
 			{
-				dotHitRacket(screen,&ball, &r2);
+				dotHitRacket(screen,&ball, &r2, List);
 			}
 			
 		}
@@ -57,8 +57,19 @@ int main()
 			{
 				moveRacket(screen,&r2,DOWN);
 			}
+
 		}
 
+		for (int i = 0; i < 2; i++)
+		{
+			if (List[i]->score >= 1)
+			{
+				system("cls");
+				printf("Player %d Venceu!\n", i+1);
+				_getch;
+				return 0;
+			}
+		}
 		draw(screen);
 		sleep();
 	}
