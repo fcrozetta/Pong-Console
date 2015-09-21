@@ -17,7 +17,6 @@ int main(){
 	initializeRacket(screen, &r2, RIGHT_SIDE);
 	initializeDot(screen, &ball, UPLEFT);
 	
-
 	while (true) // Main loop
 	{
 		initialize(screen);
@@ -58,8 +57,19 @@ int main(){
 			{
 				moveRacket(screen,&r2,DOWN);
 			}
+
 		}
 
+		for (int i = 0; i < 2; i++)
+		{
+			if (List[i]->score >= 1)
+			{
+				system("cls");
+				printf("Player %d Venceu!\n", i+1);
+				_getch;
+				return 0;
+			}
+		}
 		draw(screen);
 		sleep();
 	}

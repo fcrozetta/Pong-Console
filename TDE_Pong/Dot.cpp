@@ -1,15 +1,7 @@
 #include "stdafx.h"
 
-void gameScore(int side,Racket ** list){
-	Racket *r1=list[0], *r2=list[1];
-	switch(side){
-		case UPLEFT:
-			r1->score += 1;
-		break;
-		case UPRIGHT:
-			r2->score += 1;
-		break;
-	}
+void gameScore(Racket *r){
+	r->score++;
 }
 
 void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d) {
@@ -107,13 +99,18 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket 
 	}
 	if (d->width < 0)
 	{
+		gameScore(list[1]);
+		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
+		_getch();
 		initializeDot(screen, d, UPLEFT);
-		gameScore(UPLEFT, list);
+		
 	}
 	if (d->width >= WIDTH)
 	{
+		gameScore(list[2]);
+		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
+		_getch();
 		initializeDot(screen, d, UPRIGHT);
-		gameScore(UPLEFT, list);
 	}
 
 	if (hitWall)
