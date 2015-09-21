@@ -4,7 +4,8 @@
 #include "stdafx.h"
 
 
-int main(){
+int main()
+{
 	/* Initialize scene and its objects */
 
 	Racket r1 = Racket();
