@@ -40,8 +40,8 @@ void draw(char screen[HEIGHT][WIDTH]) {
 	{
 		for (j = 0; j < WIDTH; j++)
 		{
-			printf("%c", screen[i][j]);
+			printf_s("%c", screen[i][j]);
 		}
-		printf("\n");
+		printf_s("\n");
 	}
 }
