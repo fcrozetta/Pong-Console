@@ -26,16 +26,16 @@ int main()
 		drawRacket(screen, &r1);
 		drawRacket(screen, &r2);
 
-		moveDot(screen, ball.direction, &ball, List);
+		moveDot(screen, ball.direction, &ball, &List);
 		if (screen[ball.height][ball.width] == RACKET_BRUSH)
 		{
 			if (ball.width < (WIDTH/2))
 			{
-				dotHitRacket(screen,&ball, &r1, List);
+				dotHitRacket(screen,&ball, &r1, &List);
 			}
 			else
 			{
-				dotHitRacket(screen,&ball, &r2, List);
+				dotHitRacket(screen,&ball, &r2, &List);
 			}
 			
 		}
