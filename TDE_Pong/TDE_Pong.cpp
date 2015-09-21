@@ -62,7 +62,7 @@ int main(){
 
 		for (int i = 0; i < 2; i++)
 		{
-			if (List[i]->score >= 1)
+			if (List[i]->score >= 10)
 			{
 				system("cls");
 				printf("Player %d Venceu!\n", i+1);
