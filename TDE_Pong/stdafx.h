@@ -12,7 +12,6 @@
 #define WALL_TOP_BOTTOM '.'
 #define WALL_LEFT_RIGHT '.'
 #define RACKET_BRUSH '|'
-#define clear() system("cls");
 #define sleep() Sleep(1);
 
 

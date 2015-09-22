@@ -1,47 +1,24 @@
 #pragma once
 #include "stdafx.h"
 
-void initialize(char screen[HEIGHT][WIDTH]) {
-	int i, j;
-
-	/* Creates walls on top and bottom */
-	for ( i = 0; i < HEIGHT; i +=(HEIGHT-1))
+void drawScreen() {
+	for (short i = 0; i < HEIGHT; i++) //Draw Top && Bottom
 	{
-		for ( j = 0;  j < WIDTH;  j++)
-		{
-			screen[i][j] = WALL_TOP_BOTTOM;
-		}
+		draw({ 0,i }, WALL_TOP_BOTTOM);
+		draw({ WIDTH-1,i }, WALL_TOP_BOTTOM);
 	}
 
-	/* Creates walls on left and right sides */
-	for ( i = 1; i < HEIGHT-1; i++)
+	for (short i = 1; i < WIDTH; i++) //Draw Left && Right
 	{
-		for (j = 0; j < WIDTH; j += (WIDTH-1))
-		{
-			screen[i][j] = WALL_LEFT_RIGHT;
-		}
+		draw({ i,0 }, WALL_LEFT_RIGHT);
+		draw({ i,HEIGHT-1 }, WALL_LEFT_RIGHT);
 	}
 
-	/* Creates Empty spaces in the middle */
-	for (i = 1; i < HEIGHT-1; i++)
-	{
-		for (j = 1; j < WIDTH-1; j++)
-		{
-			screen[i][j] = SPACE;
-		}
-	}
 }
 
-void draw(char screen[HEIGHT][WIDTH]) {
+void draw(COORD posXY,char symbol) {
 	/* Draw the screen */
-	clear();
-	int i, j;
-	for (i = 0; i < HEIGHT; i++)
-	{
-		for (j = 0; j < WIDTH; j++)
-		{
-			printf("%c", screen[i][j]);
-		}
-		printf("\n");
-	}
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), posXY);
+	printf("%c", symbol);
+
 }

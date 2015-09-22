@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 
+//TODO: Remove matrix from code ... we will not need that anymore
 
 int main(){
 	/* Initialize scene and its objects */
@@ -10,20 +11,15 @@ int main(){
 	Racket r1 = Racket();
 	Racket r2 = Racket();
 	Racket * List [2] = { &r1,&r2 };
-
 	Dot ball = Dot();	
-	char screen[HEIGHT][WIDTH];
-	initializeRacket(screen, &r1, LEFT_SIDE);
-	initializeRacket(screen, &r2, RIGHT_SIDE);
-	initializeDot(screen, &ball, UPLEFT);
-	
+	//initializeDot(&ball, UPLEFT);
+	initializeRacket(&r1, LEFT_SIDE);
+	initializeRacket(&r2, RIGHT_SIDE);
+	drawScreen();
+	printf("its here");
+	Sleep(10000);/*
 	while (true) // Main loop
 	{
-		initialize(screen);
-		
-		drawRacket(screen, &r1);
-		drawRacket(screen, &r2);
-
 		moveDot(screen, ball.direction, &ball, List);
 		if (screen[ball.height][ball.width] == RACKET_BRUSH)
 		{
@@ -40,7 +36,6 @@ int main(){
 		
 
 		if (_kbhit()) {
-			/* _kbhit is used to know if user pressed a button (keyboard) */
 			char pressedKey = _getch();
 			if (pressedKey == 'w'){
 				moveRacket(screen, &r1,UP);
@@ -70,9 +65,7 @@ int main(){
 				return 0;
 			}
 		}
-		draw(screen);
-		sleep();
-	}
+	}*/
     return 0;
 }
 

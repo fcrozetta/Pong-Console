@@ -3,6 +3,7 @@
 
 typedef struct dot
 {
+	COORD posXY = {};
 	int width; // Position x (width) 
 	int height; // Position y (height)
 	int deltaWidth; // Variation for x (width)
