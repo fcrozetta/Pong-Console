@@ -4,8 +4,6 @@
 typedef struct racket
 {
 	COORD centerXY = {};
-	int centerH; // height postion (y)
-	int centerW; // width position (x)
 	int speed = 1; // movement speed
 	int score = 0;
 	int size = 7; //size of racket

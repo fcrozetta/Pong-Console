@@ -13,6 +13,7 @@ int main(){
 	Racket * List [2] = { &r1,&r2 };
 	Dot ball = Dot();	
 	//initializeDot(&ball, UPLEFT);
+
 	initializeRacket(&r1, LEFT_SIDE);
 	initializeRacket(&r2, RIGHT_SIDE);
 	drawScreen();

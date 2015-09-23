@@ -132,7 +132,8 @@ void dotHitRacket(char screen[HEIGHT][WIDTH], Dot *d, Racket *r, Racket **  list
 	[-3] | -> DOWNRIGHT	(deltaHeight +=3 && deltaWidth = 2)	DOWNLEFT <- |
 
 	*/
-	int hitPosition = r->centerH - d->height;
+	//int hitPosition = r->centerH - d->height;
+	int hitPosition = 0;
 	Direction dir;
 	r->side == LEFT_SIDE ? d->width += 1 : d->width -= 1;
 	switch (hitPosition)

@@ -21,22 +21,24 @@ void initializeRacket(racket *r, Side s) {
 }
 
 void drawRacket(racket *r) {
-	for (int i = 0; i < r->size; i++)
+	for (int i = 0 ; i <= (r->size / 2); i++)
 	{
-		short y = r->centerXY.Y;
-		short x = (r->centerXY.X / 2) + 1;
-		printf("%d", x);
-		draw({ x,y }, RACKET_BRUSH);
+		short x = r->centerXY.X;
+		short y_top = (r->centerXY.Y) + i;
+		short y_bottom = (r->centerXY.Y) - i;
+		draw({ x,y_top }, RACKET_BRUSH);
+		draw({ x,y_bottom }, RACKET_BRUSH);
 	}
 }
 
 void moveRacket(char screen[HEIGHT][WIDTH], Racket *r, Direction d) {
-	for (int i = 0; i < r->size; i++)
+
+	/*for (int i = 0; i < r->size; i++)
 	{
 		screen[r->centerH - r->size / 2 + i][r->centerW] = SPACE;
 		
 	}
-	/* It's working. do NOT touch */
+	// It's working. do NOT touch
 	switch (d)
 	{
 	case Direction::UP:
@@ -59,5 +61,5 @@ void moveRacket(char screen[HEIGHT][WIDTH], Racket *r, Direction d) {
 	for (int i = 0; i < r->size; i++)
 	{
 		screen[r->centerH - r->size / 2 + i][r->centerW] = RACKET_BRUSH;
-	}
+	}*/
 }
