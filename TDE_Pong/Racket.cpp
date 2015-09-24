@@ -1,20 +1,15 @@
 #include "stdafx.h"
 
-void moveRacket(char screen[HEIGHT][WIDTH], Racket *r) {
-
-}
-
 void initializeRacket(char screen[HEIGHT][WIDTH], racket *r, Side s) {
 	r->centerH = HEIGHT / 2;
 	r->side = s;
 	switch (s)
 	{
-	case Side::LEFT_SIDE:
-		
+	case LEFT_SIDE:
 		r->centerW = 2;
 		break;
-	case Side::RIGHT_SIDE:
-		r->centerW = WIDTH - 2;
+	case RIGHT_SIDE:
+		r->centerW = WIDTH - 4;
 	}
 }
 
@@ -29,20 +24,21 @@ void moveRacket(char screen[HEIGHT][WIDTH], Racket *r, Direction d) {
 	/* It's working. do NOT touch */
 	switch (d)
 	{
-	case Direction::UP:
+	case UP:
 		r->centerH -= r->speed;
 		break;
-	case Direction::DOWN:
+	case DOWN:
 		r->centerH += r->speed;
 	}
 
-	if (r->centerH - (r->size /2) <= 0) // Top limit
+	if (r->centerH - (r->size / 2) <= 0) // Top limit
 	{
 		r->centerH = (r->size / 2) + 1;
 	}
 
-	if (r->centerH + (r->size/2) >= HEIGHT-1) //Bottom limit
+	if (r->centerH + (r->size / 2) >= HEIGHT - 1) //Bottom limit
 	{
-		r->centerH = HEIGHT - (r->size/2) -2;
+		r->centerH = HEIGHT - (r->size / 2) - 2;
 	}
+	
 }

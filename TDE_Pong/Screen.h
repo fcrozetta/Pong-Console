@@ -22,3 +22,6 @@ typedef enum direction
 
 void initialize(char screen[HEIGHT][WIDTH]);
 void draw(char screen[HEIGHT][WIDTH]);
+void PvP();
+void PvC();
+void gameMenu(char screen[HEIGHT][WIDTH]);

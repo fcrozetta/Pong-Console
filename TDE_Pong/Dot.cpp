@@ -1,7 +1,11 @@
 #include "stdafx.h"
 
 void gameScore(Racket *r){
-	r->score++;
+	r->centerH; // height postion (y)
+	r->centerW; // width position (x)
+	r->speed = 1; // movement speed
+	r->score ++;
+	r->size = 7; //size of racket
 }
 
 void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d) {
@@ -45,7 +49,7 @@ void initializeDot(char screen[HEIGHT][WIDTH], Dot *d,Direction direction) {
 	d->width = WIDTH / 2;
 }
 
-void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket ** list) {
+void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d, Racket ** list) {
 	if (screen[d->height][d->width] == RACKET_BRUSH)
 	{
 		screen[d->height][d->width] = RACKET_BRUSH;
@@ -69,7 +73,7 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket 
 		break;
 	case UPLEFT:
 		moveDot(screen, UP, d, list);
-		moveDot(screen, LEFT, d,list);
+		moveDot(screen, LEFT, d, list);
 		break;
 	case UPRIGHT:
 		moveDot(screen, UP, d, list);
@@ -86,13 +90,88 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket 
 	}
 
 	/* Bounding Box */
-	
+
 	if (d->height <= 0)
 	{
 		d->height = 1;
 		hitWall = true;
 	}
-	if (d->height >= HEIGHT-1)
+	if (d->height >= HEIGHT - 1)
+	{
+		d->height = HEIGHT - 3;
+		hitWall = true;
+	}
+	if (d->width < 0)
+	{
+		gameScore(list[0]);
+		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
+		_getch();
+		initializeDot(screen, d, UPLEFT);
+
+	}
+	if (d->width >= WIDTH-2)
+	{
+		_getch();
+		initializeDot(screen, d, UPRIGHT);
+	}
+
+	if (hitWall)
+	{
+		dotHitWall(screen, d);
+	}
+	screen[d->height][d->width] = DOT;
+}
+
+void moveDotPvC(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d, Racket ** list) {
+	if (screen[d->height][d->width] == RACKET_BRUSH)
+	{
+		screen[d->height][d->width] = RACKET_BRUSH;
+		return;
+	}
+	screen[d->height][d->width] = SPACE;
+	bool hitWall = false;
+	switch (dotDirection)
+	{
+	case UP:
+		d->height -= d->deltaHeight;
+		moveRacket(screen, list[1], UP);
+		break;
+	case DOWN:
+		d->height += d->deltaHeight;
+		moveRacket(screen, list[1], DOWN);
+		break;
+	case RIGHT:
+		d->width += d->deltaWidth;
+		break;
+	case LEFT:
+		d->width -= d->deltaWidth;
+		break;
+	case UPLEFT:
+		moveDotPvC(screen, UP, d, list);
+		moveDotPvC(screen, LEFT, d, list);
+		break;
+	case UPRIGHT:
+		moveDotPvC(screen, UP, d, list);
+		moveDotPvC(screen, RIGHT, d, list);
+		break;
+	case DOWNLEFT:
+		moveDotPvC(screen, DOWN, d, list);
+		moveDotPvC(screen, LEFT, d, list);
+		break;
+	case DOWNRIGHT:
+		moveDotPvC(screen, DOWN, d, list);
+		moveDotPvC(screen, RIGHT, d, list);
+		break;
+	}
+
+	/* Bounding Box */
+
+	if (d->height <= 0)
+	{
+		d->height = 1;
+		hitWall = true;
+	}
+	if (d->height >= HEIGHT - 1)
 	{
 		d->height = HEIGHT - 2;
 		hitWall = true;
@@ -103,7 +182,7 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket 
 		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
 		_getch();
 		initializeDot(screen, d, UPLEFT);
-		
+
 	}
 	if (d->width >= WIDTH)
 	{
