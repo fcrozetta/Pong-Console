@@ -37,15 +37,29 @@ void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d) {
 	};
 }
 
-void initializeDot(char screen[HEIGHT][WIDTH], Dot *d,Direction direction) {
+void initializeDot(Dot *d,Direction direction) {
+	/* initialize Dot, using new coordinates :) */
 	d->direction = direction;
-	d->deltaHeight = 1;
-	d->deltaWidth = 1;
-	d->height = HEIGHT / 2;
-	d->width = WIDTH / 2;
+	d->deltaY = 1;
+	d->deltaX = 1;
+	d->posXY.Y = HEIGHT / 2;
+	d->posXY.X = WIDTH / 2;
 }
 
-void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket ** list) {
+void drawDot(Dot *d) {
+	/* this SHOULD print the Dot */
+	draw(d->posXY, DOT);
+}
+
+void moveDot(Direction dotDirection, Dot * d,Racket ** list) {
+	/* Change this Logic :
+		1-> Print Space in old place
+		2-> Check if the next position is a "hit"
+			yes -> return 1 position, draw and calculate direction
+			no -> draw ..
+		*/
+
+
 	if (screen[d->height][d->width] == RACKET_BRUSH)
 	{
 		screen[d->height][d->width] = RACKET_BRUSH;
@@ -56,16 +70,16 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket 
 	switch (dotDirection)
 	{
 	case UP:
-		d->height -= d->deltaHeight;
+		d->height -= d->deltaY;
 		break;
 	case DOWN:
-		d->height += d->deltaHeight;
+		d->height += d->deltaY;
 		break;
 	case RIGHT:
-		d->width += d->deltaWidth;
+		d->width += d->deltaX;
 		break;
 	case LEFT:
-		d->width -= d->deltaWidth;
+		d->width -= d->deltaX;
 		break;
 	case UPLEFT:
 		moveDot(screen, UP, d, list);
@@ -139,44 +153,44 @@ void dotHitRacket(char screen[HEIGHT][WIDTH], Dot *d, Racket *r, Racket **  list
 	switch (hitPosition)
 	{
 	case 0:
-		d->deltaHeight = 0;
-		d->deltaWidth = 1;
+		d->deltaY = 0;
+		d->deltaX = 1;
 		r->side == LEFT_SIDE ? d->direction=RIGHT : d->direction=LEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, RIGHT, d, list) : moveDot(screen, LEFT, d,list);
 		break;
 	case 1:
-		d->deltaHeight += 1;
-		d->deltaWidth = 1;
+		d->deltaY += 1;
+		d->deltaX = 1;
 		r->side == LEFT_SIDE ? d->direction = UPRIGHT : d->direction = UPLEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, UPRIGHT, d, list) : moveDot(screen, UPLEFT, d, list);
 		break;
 	case 2:
-		d->deltaHeight += 2;
-		d->deltaWidth = 1;
+		d->deltaY += 2;
+		d->deltaX = 1;
 		r->side == LEFT_SIDE ? d->direction = UPRIGHT : d->direction = UPLEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, UPRIGHT, d, list) : moveDot(screen, UPLEFT, d, list);
 		break;
 	case 3:
-		d->deltaHeight += 3;
-		d->deltaWidth = 2;
+		d->deltaY += 3;
+		d->deltaX = 2;
 		r->side == LEFT_SIDE ? d->direction = UPRIGHT : d->direction = UPLEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, UPRIGHT, d, list) : moveDot(screen, UPLEFT, d, list);
 		break;
 	case -1:
-		d->deltaHeight += 1;
-		d->deltaWidth = 1;
+		d->deltaY += 1;
+		d->deltaX = 1;
 		r->side == LEFT_SIDE ? d->direction = DOWNRIGHT : d->direction = DOWNLEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, DOWNRIGHT, d, list) : moveDot(screen, DOWNLEFT, d, list);
 		break;
 	case -2:
-		d->deltaHeight += 2;
-		d->deltaWidth = 1;
+		d->deltaY += 2;
+		d->deltaX = 1;
 		r->side == LEFT_SIDE ? d->direction = DOWNRIGHT : d->direction = DOWNLEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, DOWNRIGHT, d, list) : moveDot(screen, DOWNLEFT, d, list);
 		break;
 	case -3:
-		d->deltaHeight += 3;
-		d->deltaWidth = 2;
+		d->deltaY += 3;
+		d->deltaX = 2;
 		r->side == LEFT_SIDE ? d->direction = DOWNRIGHT : d->direction = DOWNLEFT;
 		r->side == LEFT_SIDE ? moveDot(screen, DOWNRIGHT, d, list) : moveDot(screen, DOWNLEFT, d, list);
 		break;

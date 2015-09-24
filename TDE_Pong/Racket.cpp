@@ -1,9 +1,5 @@
 #include "stdafx.h"
 
-void moveRacket(char screen[HEIGHT][WIDTH], Racket *r) {
-
-}
-
 void initializeRacket(racket *r, Side s) {
 	switch (s)
 	{
@@ -20,7 +16,20 @@ void initializeRacket(racket *r, Side s) {
 	
 }
 
+void clearRacket(racket *r) {
+	for (int i = 0; i <= (r->size / 2); i++)
+	{
+		short x = r->centerXY.X;
+		short y_top = (r->centerXY.Y) + i;
+		short y_bottom = (r->centerXY.Y) - i;
+		draw({ x,y_top }, SPACE);
+		draw({ x,y_bottom }, SPACE);
+	}
+}
+
+
 void drawRacket(racket *r) {
+	clearRacket(r);
 	for (int i = 0 ; i <= (r->size / 2); i++)
 	{
 		short x = r->centerXY.X;
@@ -31,35 +40,27 @@ void drawRacket(racket *r) {
 	}
 }
 
-void moveRacket(char screen[HEIGHT][WIDTH], Racket *r, Direction d) {
-
-	/*for (int i = 0; i < r->size; i++)
-	{
-		screen[r->centerH - r->size / 2 + i][r->centerW] = SPACE;
-		
-	}
-	// It's working. do NOT touch
+void moveRacket(Racket *r, Direction d) {
+	/* It's still working.. Keep NOT touching this code :) */
+	clearRacket(r);
 	switch (d)
 	{
 	case Direction::UP:
-		r->centerH -= r->speed;
+		r->centerXY.Y -= r->speed;
 		break;
 	case Direction::DOWN:
-		r->centerH += r->speed;
+		r->centerXY.Y += r->speed;
 	}
 
-	if (r->centerH - (r->size /2) <= 0) // Top limit
+	if (r->centerXY.Y - (r->size /2) <= 0) // Top limit
 	{
-		r->centerH = (r->size / 2) + 1;
+		r->centerXY.Y = (r->size / 2) + 1;
 	}
 
-	if (r->centerH + (r->size/2) >= HEIGHT-1) //Bottom limit
+	if (r->centerXY.Y + (r->size/2) >= HEIGHT-1) //Bottom limit
 	{
-		r->centerH = HEIGHT - (r->size/2) -2;
+		r->centerXY.Y = HEIGHT - (r->size/2) -2;
 	}
 
-	for (int i = 0; i < r->size; i++)
-	{
-		screen[r->centerH - r->size / 2 + i][r->centerW] = RACKET_BRUSH;
-	}*/
+	drawRacket(r);
 }

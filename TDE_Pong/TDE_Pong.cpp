@@ -12,12 +12,12 @@ int main(){
 	Racket r2 = Racket();
 	Racket * List [2] = { &r1,&r2 };
 	Dot ball = Dot();	
-	//initializeDot(&ball, UPLEFT);
-
+	initializeDot(&ball, UPLEFT);
+	
+	drawScreen();
 	initializeRacket(&r1, LEFT_SIDE);
 	initializeRacket(&r2, RIGHT_SIDE);
-	drawScreen();
-	printf("its here");
+	
 	Sleep(10000);/*
 	while (true) // Main loop
 	{

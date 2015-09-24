@@ -4,15 +4,14 @@
 typedef struct dot
 {
 	COORD posXY = {};
-	int width; // Position x (width) 
-	int height; // Position y (height)
-	int deltaWidth; // Variation for x (width)
-	int deltaHeight; // Variation for y (height)
+	int deltaX; // Variation for x (width)
+	int deltaY; // Variation for y (height)
 	Direction direction;
 }Dot;
 
 void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d);
-void initializeDot(char screen[HEIGHT][WIDTH], Dot * d,direction direction);
+void initializeDot(Dot * d, Direction direction);
+void moveDot(Dot * d, Racket ** list);
 void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d,Racket ** list);
 void dotHitRacket(char screen[HEIGHT][WIDTH], Dot * d, Racket * r,Racket ** list);
 

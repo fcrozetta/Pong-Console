@@ -3,14 +3,16 @@
 
 typedef struct racket
 {
-	COORD centerXY = {};
-	int speed = 1; // movement speed
-	int score = 0;
-	int size = 7; //size of racket
+	COORD centerXY = {}; //X,Y coodinates
+	short speed = 1; // movement speed
+	short size = 7; //size of racket
+	int score = 0; // Score... obbviously
 	Side side; //Left or right
 }Racket;
 
 void initializeRacket(racket * r, Side s);
+
+void clearRacket(racket * r);
 
 void drawRacket(racket * r);
 
