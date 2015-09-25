@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+
 typedef enum side
 {
 	LEFT_SIDE,
@@ -20,5 +21,4 @@ typedef enum direction
 
 
 void drawScreen();
-
 void draw(COORD posXY, char symbol);

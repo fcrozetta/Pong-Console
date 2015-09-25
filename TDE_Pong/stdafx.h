@@ -9,10 +9,8 @@
 #define WIDTH 80
 #define DOT '*'
 #define SPACE ' '
-#define WALL_TOP_BOTTOM '.'
-#define WALL_LEFT_RIGHT '.'
+#define WALL '.'
 #define RACKET_BRUSH '|'
-#define sleep() Sleep(1);
 
 
 #include "targetver.h"
@@ -25,7 +23,3 @@
 #include "Screen.h"
 #include "Racket.h"
 #include "Dot.h"
-
-
-
-
