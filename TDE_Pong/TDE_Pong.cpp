@@ -21,11 +21,32 @@ int main(){
 
 	while (true) // Main loop
 	{
+		printScore(&r1, &r2);
 		d.nextPos = d.posXY;
 		nextPos(&d, d.direction);
 		ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, d.nextPos, (LPDWORD)&num_read);
 		d.nextPosChar = buf[0];
 
+		/* Increment Score */
+		if (d.nextPos.X == 0)
+		{
+			r2.score++;
+			draw(d.posXY, SPACE);
+			d.direction = UPLEFT;
+			initializeDot(&d, d.direction);
+			printScore(&r1, &r2);
+			_getch();
+		}
+		if (d.nextPos.Y == WIDTH)
+		{
+			r1.score++;
+			d.direction = UPRIGHT;
+			initializeDot(&d, d.direction);
+			printScore(&r1, &r2);
+			_getch();
+		}
+
+		/* Calc based on NextPosition. This avoid printing over other things*/
 		switch (d.nextPosChar)
 		{
 		case RACKET_BRUSH:
@@ -41,6 +62,8 @@ int main(){
 			break;
 		}
 
+
+		/* Keyboard events */
 		if (_kbhit()) {
 			char pressedKey = _getch();
 			if (pressedKey == 'w'){

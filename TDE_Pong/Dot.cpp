@@ -1,8 +1,6 @@
 #include "stdafx.h"
 
-void gameScore(Racket *r){
-	r->score++;
-}
+
 
 void initializeDot(Dot *d,Direction direction) {
 	/* initialize Dot, using new coordinates :) */

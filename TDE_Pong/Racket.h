@@ -17,3 +17,5 @@ void clearRacket(racket * r);
 void drawRacket(racket * r);
 
 void moveRacket(Racket * r, Direction d);
+
+void printScore(Racket * r1, Racket * r2);

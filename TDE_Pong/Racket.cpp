@@ -64,3 +64,10 @@ void moveRacket(Racket *r, Direction d) {
 
 	drawRacket(r);
 }
+
+void printScore(Racket *r1, Racket *r2) {
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,HEIGHT + 1 });
+	printf("Player 1: %d", r1->score);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { WIDTH - 12,HEIGHT + 1 });
+	printf("Player 2: %d", r2->score);
+}
