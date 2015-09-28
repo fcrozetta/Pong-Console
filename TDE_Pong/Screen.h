@@ -22,3 +22,4 @@ typedef enum direction
 
 void initialize(char screen[HEIGHT][WIDTH]);
 void draw(char screen[HEIGHT][WIDTH]);
+bool gameMenu(boolean * d);

@@ -30,6 +30,10 @@ void initialize(char screen[HEIGHT][WIDTH]) {
 			screen[i][j] = SPACE;
 		}
 	}
+	for (i = 0; i != HEIGHT; i++) {
+		screen[i][WIDTH / 2] = '.';
+	}
+	
 }
 
 void draw(char screen[HEIGHT][WIDTH]) {
@@ -44,4 +48,21 @@ void draw(char screen[HEIGHT][WIDTH]) {
 		}
 		printf("\n");
 	}
+}
+
+bool gameMenu(boolean * difficulty) {
+	int choose,d=1;
+	printf("Choose 1 for singleplayer or 2 for multiplayer : ");
+	scanf_s("%d", &choose);
+	if (choose == 1) {
+		printf("Choose 1 for difficulty easy or 2 for expert : ");
+		scanf_s("%d", &d);
+	}
+	if (d == 2) {
+		*difficulty = true;
+	}
+	if (choose == 1) {
+		return false;
+	}
+	return true;
 }

@@ -10,6 +10,9 @@ int main(){
 	Racket r1 = Racket();
 	Racket r2 = Racket();
 	Racket * List [2] = { &r1,&r2 };
+	boolean difficulty = false;
+	r2.isplayer = gameMenu(&difficulty);
+	r2.difficulty = difficulty;
 
 	Dot ball = Dot();	
 	char screen[HEIGHT][WIDTH];
@@ -49,24 +52,29 @@ int main(){
 			{
 				moveRacket(screen, &r1, DOWN);
 			}
-			if (pressedKey == 'i')
-			{
-				moveRacket(screen, &r2, UP);
+			//Check if the user choose pvp or pvc
+			if (r2.isplayer) {
+				//Choose multiplayer
+				if (pressedKey == 'i')
+				{
+					moveRacket(screen, &r2, UP);
+				}
+				if (pressedKey == 'k')
+				{
+					moveRacket(screen, &r2, DOWN);
+				}
 			}
-			if (pressedKey == 'k')
-			{
-				moveRacket(screen,&r2,DOWN);
-			}
-
 		}
-
+		if (!r2.isplayer) {
+			moveCPU(screen, &r2,ball.direction);
+		}
 		for (int i = 0; i < 2; i++)
 		{
 			if (List[i]->score >= 10)
 			{
 				system("cls");
 				printf("Player %d Venceu!\n", i+1);
-				_getch;
+				_getch();
 				return 0;
 			}
 		}
