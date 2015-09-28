@@ -5,8 +5,8 @@
 
 #pragma once
 
-#define HEIGHT 22	
-#define WIDTH 75
+#define HEIGHT 23	
+#define WIDTH 76
 #define DOT '*'
 #define SPACE ' '
 #define WALL_TOP_BOTTOM '.'
