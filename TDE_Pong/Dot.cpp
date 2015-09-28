@@ -53,11 +53,23 @@ void nextPos(Dot *d,Direction dir) {
 	}
 }
 
-void moveDot(Dot * d) {
-	d->posXY = d->nextPos;
+void moveDot(Dot * d,direction dir,Racket **rList) {
+	/* Calc based on NextPosition. This avoid printing over other things*/
+	if ((d->sideChar == RACKET_BRUSH) ||(d->nextPosChar == RACKET_BRUSH))
+	{
+		d->nextPos.X < WIDTH / 2 ? dotHitRacket(d, rList[0]) : dotHitRacket(d, rList[1]);
+	}
+	else if (d->nextPosChar == WALL) {
+		dotHitWall(d);
+	}
+	else {
+		draw(d->posXY, SPACE);
+		d->posXY = d->nextPos;
+	}
+
 }
 
-void dotHitRacket(Dot *d, Racket *r, Racket **  list) {
+void dotHitRacket(Dot *d, Racket *r) {
 	/*
 
 	[+3] | -> UPRIGHT	(deltaHeight +=3 && deltaWidth = 2)	UPLEFT	 <- |
@@ -69,9 +81,67 @@ void dotHitRacket(Dot *d, Racket *r, Racket **  list) {
 	[-3] | -> DOWNRIGHT	(deltaHeight +=3 && deltaWidth = 2)	DOWNLEFT <- |
 
 	*/
+	if (d->sideChar == RACKET_BRUSH)
+	{
 
+	}
+	int hitPosition = r->centerXY.Y - d->nextPos.Y; // Set the difference between center of racket and dot (from -3 to +3)
+	Direction dir;
+	switch (hitPosition)
+	{
+	case 0:
+		d->deltaY = 0;
+		d->deltaX = 1;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = RIGHT : d->direction = LEFT;
+		nextPos(d, d->direction);
+		break;
+	case 1:
+		d->deltaY += 1;
+		d->deltaX = 1;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = UPRIGHT : d->direction = UPLEFT;
+		nextPos(d, d->direction);
+		break;
+	case 2:
+		d->deltaY += 2;
+		d->deltaX = 1;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = UPRIGHT : d->direction = UPLEFT;
+		nextPos(d, d->direction);
+		break;
+	case 3:
+		d->deltaY += 3;
+		d->deltaX = 2;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = UPRIGHT : d->direction = UPLEFT;
+		nextPos(d, d->direction);
+		break;
+	case -1:
+		d->deltaY += 1;
+		d->deltaX = 1;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = DOWNRIGHT : d->direction = DOWNLEFT;
+		nextPos(d, d->direction);
+		break;
+	case -2:
+		d->deltaY += 2;
+		d->deltaX = 1;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = DOWNRIGHT : d->direction = DOWNLEFT;
+		nextPos(d, d->direction);
+		break;
+	case -3:
+		d->deltaY += 3;
+		d->deltaX = 2;
+		d->nextPos = d->posXY;
+		r->side == LEFT_SIDE ? d->direction = DOWNRIGHT : d->direction = DOWNLEFT;
+		nextPos(d, d->direction);
+		break;
+	}
 }
-void dotHitWall(Dot *d) {
+
+void dotHitWall(Dot *d){
 	switch (d->direction)
 	{
 	case UP:

@@ -17,15 +17,21 @@ int main(){
 	drawScreen();
 	initializeRacket(&r1, LEFT_SIDE);
 	initializeRacket(&r2, RIGHT_SIDE);
-	initializeDot(&d, UPLEFT);
+	initializeDot(&d, LEFT);
 
 	while (true) // Main loop
 	{
 		printScore(&r1, &r2);
 		d.nextPos = d.posXY;
 		nextPos(&d, d.direction);
+
+		/* next position char*/
 		ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, d.nextPos, (LPDWORD)&num_read);
 		d.nextPosChar = buf[0];
+
+		/* char on the left or right side of the dot (Use this to know if you hit the racket*/
+		d.posXY.X < WIDTH / 2 ? ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X - 1,d.posXY.Y }, (LPDWORD)&num_read) : ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X + 1,d.posXY.Y }, (LPDWORD)&num_read);
+		d.sideChar = buf[0];
 
 		/* Increment Score */
 		if (d.nextPos.X == 0)
@@ -46,22 +52,9 @@ int main(){
 			_getch();
 		}
 
-		/* Calc based on NextPosition. This avoid printing over other things*/
-		switch (d.nextPosChar)
-		{
-		case RACKET_BRUSH:
-			draw({ 0,0 }, '!');
-			break;
-		case WALL:
-			dotHitWall(&d);
-			break;
-		default:
-			draw(d.posXY, SPACE);
-			moveDot(&d);
-			drawDot(&d);
-			break;
-		}
-
+		moveDot(&d, d.direction,List);
+		drawDot(&d);
+		
 
 		/* Keyboard events */
 		if (_kbhit()) {
