@@ -7,8 +7,12 @@ void initializeDot(Dot *d,Direction direction) {
 	d->direction = direction;
 	d->deltaY = 1;
 	d->deltaX = 1;
+	d->leftChar = SPACE;
+	d->rightChar = SPACE;
+	d->nextPosChar = SPACE;
 	d->posXY.Y = HEIGHT / 2;
 	d->posXY.X = WIDTH / 2;
+	d->nextPos = { 0,0 };
 
 	drawDot(d);
 }

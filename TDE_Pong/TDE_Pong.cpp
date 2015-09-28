@@ -18,10 +18,11 @@ int main(){
 	initializeRacket(&r1, LEFT_SIDE);
 	initializeRacket(&r2, RIGHT_SIDE);
 	initializeDot(&d, LEFT);
+	printScore(&r1, &r2);
 
 	while (true) // Main loop
 	{
-		printScore(&r1, &r2);
+		
 		d.nextPos = d.posXY;
 		nextPos(&d, d.direction);
 
@@ -34,28 +35,32 @@ int main(){
 		d.leftChar = buf[0];
 		ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X + 1,d.posXY.Y }, (LPDWORD)&num_read);
 		d.rightChar = buf[0];
+		moveDot(&d, d.direction,List);
+		drawDot(&d);
 
 		/* Increment Score */
-		if (d.nextPos.X == 0)
+		if (d.nextPos.X == 0) // Hit Left Side
 		{
 			r2.score++;
 			draw(d.posXY, SPACE);
 			d.direction = UPLEFT;
-			initializeDot(&d, d.direction);
 			printScore(&r1, &r2);
+			initializeDot(&d, d.direction);
 			_getch();
+			continue;
 		}
-		if (d.nextPos.Y == WIDTH)
+		if (d.nextPos.X == WIDTH-1) // Hit Right Side
 		{
 			r1.score++;
+			draw(d.posXY, SPACE);
 			d.direction = UPRIGHT;
-			initializeDot(&d, d.direction);
 			printScore(&r1, &r2);
+			initializeDot(&d, d.direction);
 			_getch();
+			continue;
 		}
 
-		moveDot(&d, d.direction,List);
-		drawDot(&d);
+		
 		
 
 		/* Keyboard events */
