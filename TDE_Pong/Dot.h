@@ -6,7 +6,8 @@ typedef struct dot
 	COORD posXY = {};
 	COORD nextPos = {};
 	char nextPosChar;
-	char sideChar;
+	char leftChar;
+	char rightChar;
 	int deltaX; // Variation for x (width)
 	int deltaY; // Variation for y (height)
 	Direction direction;

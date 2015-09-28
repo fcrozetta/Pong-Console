@@ -29,9 +29,11 @@ int main(){
 		ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, d.nextPos, (LPDWORD)&num_read);
 		d.nextPosChar = buf[0];
 
-		/* char on the left or right side of the dot (Use this to know if you hit the racket*/
-		d.posXY.X < WIDTH / 2 ? ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X - 1,d.posXY.Y }, (LPDWORD)&num_read) : ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X + 1,d.posXY.Y }, (LPDWORD)&num_read);
-		d.sideChar = buf[0];
+		/* char on the left and right side of the dot (Use this to know if you hit the racket*/
+		ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X - 1,d.posXY.Y }, (LPDWORD)&num_read);
+		d.leftChar = buf[0];
+		ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), (LPTSTR)buf, (DWORD)BUFSIZ, { d.posXY.X + 1,d.posXY.Y }, (LPDWORD)&num_read);
+		d.rightChar = buf[0];
 
 		/* Increment Score */
 		if (d.nextPos.X == 0)
