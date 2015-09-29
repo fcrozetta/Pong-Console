@@ -4,6 +4,20 @@
 #include "stdafx.h"
 #include "TDE_Pong.h"
 
+bool checkScore(Racket ** list) {
+	for (int i = 0; i < 2; i++)
+	{
+		if (list[i]->score >= 10)
+		{
+			system("cls");
+			printf("Player %d Venceu!\n", i + 1);
+			_getch();
+			return true;
+		}
+	}
+	return false;
+}
+
 int main(){
 	char buf[BUFSIZ];
 	DWORD num_read;
@@ -17,11 +31,15 @@ int main(){
 	drawScreen();
 	initializeRacket(&r1, LEFT_SIDE);
 	initializeRacket(&r2, RIGHT_SIDE);
-	initializeDot(&d, LEFT);
+	initializeDot(&d, UPLEFT);
 	printScore(&r1, &r2);
 
 	while (true) // Main loop
 	{
+		if (checkScore(List)) // Win the Game!
+		{
+			return 0;
+		}
 		
 		d.nextPos = d.posXY;
 		nextPos(&d, d.direction);
@@ -37,31 +55,6 @@ int main(){
 		d.rightChar = buf[0];
 		moveDot(&d, d.direction,List);
 		drawDot(&d);
-
-		/* Increment Score */
-		if (d.nextPos.X == 0) // Hit Left Side
-		{
-			r2.score++;
-			draw(d.posXY, SPACE);
-			d.direction = UPLEFT;
-			printScore(&r1, &r2);
-			initializeDot(&d, d.direction);
-			_getch();
-			continue;
-		}
-		if (d.nextPos.X == WIDTH-1) // Hit Right Side
-		{
-			r1.score++;
-			draw(d.posXY, SPACE);
-			d.direction = UPRIGHT;
-			printScore(&r1, &r2);
-			initializeDot(&d, d.direction);
-			_getch();
-			continue;
-		}
-
-		
-		
 
 		/* Keyboard events */
 		if (_kbhit()) {
@@ -84,16 +77,7 @@ int main(){
 
 		}
 
-		for (int i = 0; i < 2; i++)
-		{
-			if (List[i]->score >= 10)
-			{
-				system("cls");
-				printf("Player %d Venceu!\n", i+1);
-				_getch();
-				return 0;
-			}
-		}
+		
 		Sleep(100);
 	}
     return 0;

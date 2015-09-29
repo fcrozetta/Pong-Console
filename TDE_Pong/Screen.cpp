@@ -3,16 +3,16 @@
 
 void drawScreen() {
 	/* Draw the screen */
-	for (short i = 0; i < HEIGHT; i++) //Draw Top && Bottom
+	for (short i = 1; i < HEIGHT; i++) //Draw Left && Right
 	{
-		draw({ 0,i }, WALL);
-		draw({ WIDTH-1,i }, WALL);
+		draw({ 0,i }, GOAL);
+		draw({ WIDTH,i }, GOAL);
 	}
 
-	for (short i = 1; i < WIDTH; i++) //Draw Left && Right
+	for (short i = 0; i < WIDTH; i++) //Draw Top && Bottom
 	{
 		draw({ i,0 }, WALL);
-		draw({ i,HEIGHT-1 }, WALL);
+		draw({ i,HEIGHT }, WALL);
 	}
 
 }

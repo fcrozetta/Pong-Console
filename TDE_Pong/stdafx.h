@@ -10,6 +10,7 @@
 #define DOT '*'
 #define SPACE ' '
 #define WALL '.'
+#define GOAL '#'
 #define RACKET_BRUSH '|'
 
 

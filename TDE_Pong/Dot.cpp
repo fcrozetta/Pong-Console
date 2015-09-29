@@ -59,16 +59,66 @@ void nextPos(Dot *d,Direction dir) {
 
 void moveDot(Dot * d,direction dir,Racket **rList) {
 	/* Calc based on NextPosition. This avoid printing over other things*/
-	if ((d->leftChar == RACKET_BRUSH) ||(d->nextPosChar == RACKET_BRUSH) ||(d->rightChar == RACKET_BRUSH))
+	if ((d->leftChar == GOAL) || (d->rightChar == GOAL)) 
 	{
+		// Score!
+		d->leftChar == GOAL ? ((rList[1]->score++) && (d->direction = UPLEFT)) : ((rList[0]->score++) && (d->direction = UPRIGHT));
+		draw(d->posXY, SPACE);
+		printScore(rList[0], rList[1]);
+		initializeDot(d, d->direction);
+		_getch();
+	} 
+	else if ( 
+		((d->leftChar == RACKET_BRUSH) && ((d->direction == LEFT) || (d->direction == UPLEFT) || ((d->direction == DOWNLEFT))))
+		|| ((d->rightChar == RACKET_BRUSH) && ((d->direction == RIGHT) || (d->direction == UPRIGHT) || ((d->direction == DOWNRIGHT))))
+		|| (d->nextPosChar == RACKET_BRUSH))
+	{
+		// Racket
 		d->nextPos.X < WIDTH / 2 ? dotHitRacket(d, rList[0]) : dotHitRacket(d, rList[1]);
 		draw(d->posXY, SPACE);
 		d->posXY = d->nextPos;
 	}
 	else if (d->nextPosChar == WALL) {
+		// Wall
+		if (d->nextPos.Y <= 0)
+		{
+			// Above Top
+			d->nextPos.Y = 1;
+			d->nextPos.X = d->posXY.X;
+			draw(d->posXY, SPACE);
+			d->posXY = d->nextPos;
+			drawDot(d);
+		}
+		if (d->nextPos.Y >= HEIGHT)
+		{
+			//Below bottom
+			d->posXY.Y = HEIGHT - 1;
+			draw(d->posXY, SPACE);
+			d->posXY = d->nextPos;
+			drawDot(d);
+		}
 		dotHitWall(d);
 	}
 	else {
+		// Space
+		if (d->nextPos.Y <= 0)
+		{
+			// Above Top
+			d->nextPos.Y == 1;
+			draw(d->posXY, SPACE);
+			d->posXY = d->nextPos;
+			drawDot(d);
+			dotHitWall(d);
+		}
+		if (d->nextPos.Y >= HEIGHT)
+		{
+			//Below bottom
+			d->posXY.Y == HEIGHT - 2;
+			draw(d->posXY, SPACE);
+			d->posXY = d->nextPos;
+			drawDot(d);
+			dotHitWall(d);
+		}
 		draw(d->posXY, SPACE);
 		d->posXY = d->nextPos;
 	}
@@ -88,11 +138,12 @@ void dotHitRacket(Dot *d, Racket *r) {
 
 	*/
 	int hitPosition;
+	
 	if ((d->leftChar == RACKET_BRUSH) || (d->rightChar == RACKET_BRUSH))
 	{
+		
 		d->leftChar = SPACE;
 		d->rightChar = SPACE;
-
 		hitPosition = r->centerXY.Y - d->nextPos.Y; // Set the difference between center of racket and dot (from -3 to +3)
 		Direction dir;
 		switch (hitPosition)
@@ -147,6 +198,12 @@ void dotHitRacket(Dot *d, Racket *r) {
 			nextPos(d, d->direction);
 			break;
 		}
+	}
+	else
+	{
+		r->side == LEFT_SIDE ? ((d->nextPos.X++) && (d->leftChar = RACKET_BRUSH)) : ((d->nextPos.X--) && (d->rightChar = RACKET_BRUSH));
+		draw(d->posXY, SPACE);
+		dotHitRacket(d, r);
 	}
 	
 	
