@@ -55,6 +55,22 @@ void nextPos(Dot *d,Direction dir) {
 		nextPos(d, RIGHT);
 		break;
 	}
+	if (d->nextPos.Y < 0)
+	{
+		d->nextPos.Y = 1;
+		dotHitWall(d);
+	}
+	else if (d->nextPos.Y > HEIGHT)
+	{
+		d->nextPos.Y = HEIGHT-1;
+		dotHitWall(d);
+	}
+
+	if (d->nextPos.X <= 0)
+	{
+		d->nextPos.X = 1;
+
+	}
 }
 
 void moveDot(Dot * d,direction dir,Racket **rList) {
@@ -62,11 +78,10 @@ void moveDot(Dot * d,direction dir,Racket **rList) {
 	if ((d->leftChar == GOAL) || (d->rightChar == GOAL)) 
 	{
 		// Score!
-		d->leftChar == GOAL ? ((rList[1]->score++) && (d->direction = UPLEFT)) : ((rList[0]->score++) && (d->direction = UPRIGHT));
-		draw(d->posXY, SPACE);
+		d->leftChar == GOAL ? ((d->direction = UPLEFT), (dotHitGoal(d, rList[1]))) : ((d->direction = UPRIGHT) , (dotHitGoal(d, rList[0])));
 		printScore(rList[0], rList[1]);
-		initializeDot(d, d->direction);
 		_getch();
+		
 	} 
 	else if ( 
 		((d->leftChar == RACKET_BRUSH) && ((d->direction == LEFT) || (d->direction == UPLEFT) || ((d->direction == DOWNLEFT))))
@@ -80,24 +95,30 @@ void moveDot(Dot * d,direction dir,Racket **rList) {
 	}
 	else if (d->nextPosChar == WALL) {
 		// Wall
-		if (d->nextPos.Y <= 0)
+		if ((d->posXY.Y >0) && (d->posXY.Y < HEIGHT))
 		{
-			// Above Top
-			d->nextPos.Y = 1;
-			d->nextPos.X = d->posXY.X;
-			draw(d->posXY, SPACE);
-			d->posXY = d->nextPos;
-			drawDot(d);
+			dotHitWall(d);
 		}
-		if (d->nextPos.Y >= HEIGHT)
+		else
 		{
-			//Below bottom
-			d->posXY.Y = HEIGHT - 1;
-			draw(d->posXY, SPACE);
-			d->posXY = d->nextPos;
-			drawDot(d);
+			if (d->nextPos.Y <= 0)
+			{
+				// Above Top
+				d->nextPos.Y == 1;
+				draw(d->posXY, SPACE);
+				d->posXY = d->nextPos;
+				drawDot(d);
+			}
+			else if (d->nextPos.Y >= HEIGHT)
+			{
+				//Below bottom
+				d->posXY.Y == HEIGHT - 2;
+				draw(d->posXY, SPACE);
+				d->posXY = d->nextPos;
+				drawDot(d);
+			}
 		}
-		dotHitWall(d);
+		
 	}
 	else {
 		// Space
@@ -108,19 +129,21 @@ void moveDot(Dot * d,direction dir,Racket **rList) {
 			draw(d->posXY, SPACE);
 			d->posXY = d->nextPos;
 			drawDot(d);
-			dotHitWall(d);
 		}
-		if (d->nextPos.Y >= HEIGHT)
+		else if (d->nextPos.Y >= HEIGHT)
 		{
 			//Below bottom
 			d->posXY.Y == HEIGHT - 2;
 			draw(d->posXY, SPACE);
 			d->posXY = d->nextPos;
 			drawDot(d);
-			dotHitWall(d);
 		}
-		draw(d->posXY, SPACE);
-		d->posXY = d->nextPos;
+		else
+		{
+			draw(d->posXY, SPACE);
+			d->posXY = d->nextPos;
+		}
+		
 	}
 
 }
@@ -240,4 +263,11 @@ void dotHitWall(Dot *d){
 		d->direction = LEFT;
 		break;
 	};
+}
+
+void dotHitGoal(Dot *d,Racket *r){
+	r->score++;
+	draw(d->posXY, SPACE);
+	initializeDot(d, d->direction);
+	
 }

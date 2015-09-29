@@ -25,3 +25,5 @@ void dotHitRacket(Dot * d, Racket * r);
 
 void dotHitWall(Dot * d);
 
+void dotHitGoal(Dot * d, Racket * r);
+

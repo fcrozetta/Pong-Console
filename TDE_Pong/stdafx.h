@@ -6,7 +6,7 @@
 #pragma once
 
 #define HEIGHT 23	
-#define WIDTH 80
+#define WIDTH 79
 #define DOT '*'
 #define SPACE ' '
 #define WALL '.'
