@@ -57,9 +57,9 @@ void moveRacket(Racket *r, Direction d) {
 		r->centerXY.Y = (r->size / 2) + 1;
 	}
 
-	if (r->centerXY.Y + (r->size/2) >= HEIGHT-1) //Bottom limit
+	if (r->centerXY.Y + (r->size/2) >= HEIGHT) //Bottom limit
 	{
-		r->centerXY.Y = HEIGHT - (r->size/2) -2;
+		r->centerXY.Y = HEIGHT - (r->size/2) -1;
 	}
 
 	drawRacket(r);
