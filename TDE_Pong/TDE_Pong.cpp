@@ -76,30 +76,24 @@ int main(){
 			//Check if the user choose pvp or pvc
 			if (r2.isplayer) {
 				//Choose multiplayer
-<<<<<<< HEAD
 				if (pressedKey == 'i')
 				{
 					moveRacket(screen, &r2, UP);
 				}
 				if (pressedKey == 'k')
-=======
 				if (pressedKey == 'i' || pressedKey == 'I')
 				{
 					moveRacket(screen, &r2, UP);
 				}
 				if (pressedKey == 'k' || pressedKey == 'K')
->>>>>>> pc-player
 				{
 					moveRacket(screen, &r2, DOWN);
 				}
 			}
 		}
 		if (!r2.isplayer) {
-<<<<<<< HEAD
 			moveCPU(screen, &r2,ball.direction);
-=======
 			moveCPU(screen, &r2,ball.direction,ball.height);
->>>>>>> pc-player
 		}
 		for (int i = 0; i < 2; i++)
 		{

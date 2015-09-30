@@ -42,11 +42,8 @@ void moveRacket(char screen[HEIGHT][WIDTH], Racket *r, Direction d) {
 		r->centerH = HEIGHT - (r->size/2) -2;
 	}
 }
-<<<<<<< HEAD
 void moveCPU(char screen[HEIGHT][WIDTH], Racket *r,Direction d) {
-=======
 void moveCPU(char screen[HEIGHT][WIDTH], Racket *r,Direction d,int positionx) {
->>>>>>> pc-player
 	
 	switch (r->directionCPU)
 	{
@@ -66,8 +63,6 @@ void moveCPU(char screen[HEIGHT][WIDTH], Racket *r,Direction d,int positionx) {
 		case DOWN:
 			r->directionCPU = DOWN;
 			break;
-<<<<<<< HEAD
-=======
 		case RIGHT:
 			if (r->centerH > positionx) {
 				r->directionCPU = UP;
@@ -76,7 +71,6 @@ void moveCPU(char screen[HEIGHT][WIDTH], Racket *r,Direction d,int positionx) {
 				r->directionCPU = DOWN;
 			}
 			break;
->>>>>>> pc-player
 		case UPLEFT:
 			r->directionCPU = UP;
 			break;

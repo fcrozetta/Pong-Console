@@ -23,7 +23,4 @@ typedef enum direction
 void initialize(char screen[HEIGHT][WIDTH]);
 void draw(char screen[HEIGHT][WIDTH]);
 bool gameMenu(boolean * d);
-<<<<<<< HEAD
-=======
 void printScore(int p1, int p2);
->>>>>>> pc-player
