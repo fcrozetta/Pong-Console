@@ -29,7 +29,7 @@ int main(){
 	switch (dotRand)
 	{
 	case 0:
-		initializeDot(screen, &ball, DOWNLEFT);
+		initializeDot(screen, &ball, DOWNLEFT); 
 		break;
 	case 1:
 		initializeDot(screen, &ball, UPLEFT);
