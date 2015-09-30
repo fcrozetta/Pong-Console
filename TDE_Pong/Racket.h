@@ -20,6 +20,7 @@ void drawRacket(char screen[HEIGHT][WIDTH], racket * r);
 
 void moveRacket(char screen[HEIGHT][WIDTH], Racket * r, Direction d);
 
-void moveCPU(char screen[HEIGHT][WIDTH], Racket * r, Direction d);
+void moveCPU(char screen[HEIGHT][WIDTH], Racket * r, Direction d, int positionx);
+
 
 

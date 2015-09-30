@@ -91,25 +91,24 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d, Racket
 	{
 		d->height = 1;
 		hitWall = true;
+		Beep(1000, 1);
 	}
 	if (d->height >= HEIGHT - 1)
 	{
 		d->height = HEIGHT - 2;
 		hitWall = true;
+		Beep(1000, 1);
 	}
-	if (d->width < 0)
-	{
-		gameScore(list[0]);
-		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
-		_getch();
-		initializeDot(screen, d, UPLEFT);
-
-	}
-	if (d->width >= WIDTH)
+	if(d->width < 0)
 	{
 		gameScore(list[1]);
-		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
-		_getch();
+		printScore(list[0]->score, list[1]->score);
+		initializeDot(screen, d, UPLEFT);
+
+	}else if (d->width >= WIDTH)
+	{
+		gameScore(list[0]);
+		printScore(list[0]->score, list[1]->score);
 		initializeDot(screen, d, UPRIGHT);
 	}
 
@@ -133,6 +132,7 @@ void dotHitRacket(char screen[HEIGHT][WIDTH], Dot *d, Racket *r, Racket **  list
 	int hitPosition = r->centerH - d->height;
 	Direction dir;
 	r->side == LEFT_SIDE ? d->width += 1 : d->width -= 1;
+	Beep(500, 20);
 	switch (hitPosition)
 	{
 	case 0:
