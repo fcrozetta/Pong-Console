@@ -109,8 +109,9 @@ bool gameMenu(boolean * difficulty) {
 		if (choose == 1) {
 			return false;
 		}
-		return true;
+		
 	}
+	return true;
 }
 void printScore(int p1,int p2){
 	clear();

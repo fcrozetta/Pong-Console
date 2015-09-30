@@ -92,7 +92,6 @@ int main(){
 			}
 		}
 		if (!r2.isplayer) {
-			moveCPU(screen, &r2,ball.direction);
 			moveCPU(screen, &r2,ball.direction,ball.height);
 		}
 		for (int i = 0; i < 2; i++)
