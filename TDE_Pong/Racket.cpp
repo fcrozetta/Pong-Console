@@ -62,6 +62,9 @@ void moveCPU(char screen[HEIGHT][WIDTH], Racket *r,Direction d) {
 		case DOWN:
 			r->directionCPU = DOWN;
 			break;
+		case RIGHT:
+			r->directionCPU = DOWN;
+			break;
 		case UPLEFT:
 			r->directionCPU = UP;
 			break;

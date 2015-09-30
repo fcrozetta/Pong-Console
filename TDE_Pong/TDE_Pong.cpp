@@ -45,21 +45,21 @@ int main(){
 		if (_kbhit()) {
 			/* _kbhit is used to know if user pressed a button (keyboard) */
 			char pressedKey = _getch();
-			if (pressedKey == 'w'){
+			if (pressedKey == 'w' || pressedKey == 'W'){
 				moveRacket(screen, &r1,UP);
 			}
-			if (pressedKey == 's')
+			if (pressedKey == 's' || pressedKey == 'S')
 			{
 				moveRacket(screen, &r1, DOWN);
 			}
 			//Check if the user choose pvp or pvc
 			if (r2.isplayer) {
 				//Choose multiplayer
-				if (pressedKey == 'i')
+				if (pressedKey == 'i' || pressedKey == 'I')
 				{
 					moveRacket(screen, &r2, UP);
 				}
-				if (pressedKey == 'k')
+				if (pressedKey == 'k' || pressedKey == 'K')
 				{
 					moveRacket(screen, &r2, DOWN);
 				}
