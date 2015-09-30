@@ -91,13 +91,11 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d, Racket
 	{
 		d->height = 1;
 		hitWall = true;
-		Beep(1000, 1);
 	}
 	if (d->height >= HEIGHT - 1)
 	{
 		d->height = HEIGHT - 2;
 		hitWall = true;
-		Beep(1000, 1);
 	}
 	if(d->width < 0)
 	{
@@ -132,7 +130,6 @@ void dotHitRacket(char screen[HEIGHT][WIDTH], Dot *d, Racket *r, Racket **  list
 	int hitPosition = r->centerH - d->height;
 	Direction dir;
 	r->side == LEFT_SIDE ? d->width += 1 : d->width -= 1;
-	Beep(500, 20);
 	switch (hitPosition)
 	{
 	case 0:
