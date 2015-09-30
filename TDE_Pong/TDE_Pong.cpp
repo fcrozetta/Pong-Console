@@ -3,6 +3,11 @@
 
 #include "stdafx.h"
 
+void seed(void) { 
+	//Function generate rand numbers
+	srand(time(NULL));
+	rand(); 
+}
 
 int main(){
 	/* Initialize scene and its objects */
@@ -18,9 +23,24 @@ int main(){
 	char screen[HEIGHT][WIDTH];
 	initializeRacket(screen, &r1, LEFT_SIDE);
 	initializeRacket(screen, &r2, RIGHT_SIDE);
-
-	initializeDot(screen, &ball,UPLEFT);
-	
+	seed();
+	//initializes dot randomly
+	int dotRand = rand() % 3;
+	switch (dotRand)
+	{
+	case 0:
+		initializeDot(screen, &ball, DOWNLEFT);
+		break;
+	case 1:
+		initializeDot(screen, &ball, UPLEFT);
+		break;
+	case 2:
+		initializeDot(screen, &ball, LEFT);
+		break;
+	default:
+		initializeDot(screen, &ball, UPLEFT);
+		break;
+	}
 	while (true) // Main loop
 	{
 		initialize(screen);

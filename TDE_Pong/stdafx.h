@@ -23,6 +23,7 @@
 // TODO: reference additional headers your program requires here
 #include <Windows.h>
 #include <conio.h>
+#include <time.h>
 #include "Screen.h"
 #include "Racket.h"
 #include "Dot.h"
