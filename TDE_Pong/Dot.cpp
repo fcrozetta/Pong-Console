@@ -99,17 +99,6 @@ void moveDot(char screen[HEIGHT][WIDTH], Direction dotDirection, Dot * d, Racket
 	}
 	if(d->width < 0)
 	{
-		gameScore(list[0]);
-		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
-		_getch();
-		initializeDot(screen, d, UPLEFT);
-
-	}
-	if (d->width >= WIDTH)
-	{
-		gameScore(list[1]);
-		printf("Player 1: %d\t\tPlayer 2: %d", list[0]->score, list[1]->score);
-		_getch();
 		gameScore(list[1]);
 		printScore(list[0]->score, list[1]->score);
 		initializeDot(screen, d, UPLEFT);

@@ -7,7 +7,7 @@ typedef struct dot
 	int height; // Position y (height)
 	int deltaWidth; // Variation for x (width)
 	int deltaHeight; // Variation for y (height)
-	Direction direction; 
+	Direction direction;
 }Dot;
 
 void dotHitWall(char Screen[HEIGHT][WIDTH], Dot *d);

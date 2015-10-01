@@ -29,7 +29,7 @@ int main(){
 	switch (dotRand)
 	{
 	case 0:
-		initializeDot(screen, &ball, DOWNLEFT); 
+		initializeDot(screen, &ball, DOWNLEFT);
 		break;
 	case 1:
 		initializeDot(screen, &ball, UPLEFT);
@@ -76,11 +76,6 @@ int main(){
 			//Check if the user choose pvp or pvc
 			if (r2.isplayer) {
 				//Choose multiplayer
-				if (pressedKey == 'i')
-				{
-					moveRacket(screen, &r2, UP);
-				}
-				if (pressedKey == 'k')
 				if (pressedKey == 'i' || pressedKey == 'I')
 				{
 					moveRacket(screen, &r2, UP);
